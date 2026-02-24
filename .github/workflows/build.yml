@@ -39,13 +39,12 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install npm dependencies
-        run: npm install
+      - name: Install Tauri CLI directly
+        run: cargo install tauri-cli --version "^2" --locked
 
       - name: Build Tauri app
-        uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cargo tauri build
+        working-directory: .
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4
@@ -77,13 +76,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install npm dependencies
-        run: npm install
+      - name: Install Tauri CLI directly
+        run: cargo install tauri-cli --version "^2" --locked
 
       - name: Build Tauri app
-        uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cargo tauri build
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
